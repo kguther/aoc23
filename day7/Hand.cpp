@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <sstream>
 
-std::string ORDER = "23456789TJQKA";
+std::string ORDER = "J23456789TQKA";
 
 bool value_compare(char a, char b){
 	int value_a = ORDER.find(a);
@@ -33,9 +33,16 @@ bool operator<(Hand const &first, Hand const &other) {
 int Hand::get_category() const {
 	std::vector<int> multiplicity(5);
 	std::transform(cards.begin(), cards.end(), multiplicity.begin(),
-			[this](char c){return std::count(cards.begin(), cards.end(), c);}
+			[this](char c){
+		if(c == 'J'){
+			return long(0);
+		}
+		return std::count(cards.begin(), cards.end(), c);
+	}
 	);
 	std::sort(multiplicity.begin(), multiplicity.end(), std::greater<int>());
+	int joker_count = std::count(cards.begin(), cards.end(), 'J');
+	multiplicity[0] += joker_count;
 	switch(multiplicity[0]){
 	case 1:
 		return 0;
