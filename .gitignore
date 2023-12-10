@@ -1,5 +1,4 @@
-**/input
-**/input_test
+**/input*
 **/.idea
 **/__pycache__
 **/.project
