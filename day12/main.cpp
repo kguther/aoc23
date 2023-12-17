@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[]){
 	auto records = Records::from_file("input");
-	int options = records.get_options();
+	long options = records.get_options();
 	std::cout << options << std::endl;
 }
 
